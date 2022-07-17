@@ -22,10 +22,9 @@ const storeAccounts = async ({ accountName, password, email, artist }) => {
 
 const getAllAccounts = async () => {
   const { AccountModel } = getModels()
-  const account = await AccountModel.findAll()
+  const accounts = await AccountModel.findAll()
 
-  // return account.map(account => account.get())
-  return account
+  return accounts.map(account => account.get())
 }
 
 /**
