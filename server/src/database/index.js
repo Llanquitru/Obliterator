@@ -77,7 +77,6 @@ const dbConnection = async () => {
         TransactionModel = Transaction(sequelize)
         TransactionTypeModel = TransactionType(sequelize)
 
-        sequelize.sync({ force: true })
         AccountModel.belongsTo(UserModel, { as: 'User', foreignKey: 'user_id' })
         ProjectModel.belongsTo(UserModel, { as: 'User', foreignKey: 'user_id' })
         TransactionModel.belongsTo(UserModel, {
@@ -108,6 +107,7 @@ const dbConnection = async () => {
           foreignKey: 'polygons_id'
         })
 
+        // sequelize.sync({ force: true })
         console.log('Mysql connection established.')
       }
 

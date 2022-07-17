@@ -22,7 +22,7 @@ const Model3D = sequelize => {
     {
       createdAt: true,
       updatedAt: true,
-      tableName: '3dModels'
+      tableName: 'models3D'
     }
   )
 }

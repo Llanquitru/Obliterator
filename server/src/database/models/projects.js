@@ -22,7 +22,7 @@ const Project = sequelize => {
     {
       createdAt: true,
       updatedAt: true,
-      tableName: 'Projects'
+      tableName: 'projects'
     }
   )
 }

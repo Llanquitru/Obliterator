@@ -19,7 +19,7 @@ const Polygon = sequelize => {
     {
       createdAt: true,
       updatedAt: true,
-      tableName: 'Polygons'
+      tableName: 'polygons'
     }
   )
 }

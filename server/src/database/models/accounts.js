@@ -16,13 +16,13 @@ const Account = sequelize => {
       account_name: DataTypes.STRING,
       account_password: DataTypes.STRING,
       account_email: DataTypes.STRING,
-      is_artist: DataTypes.STRING,
+      is_artist: DataTypes.INTEGER,
       user_id: DataTypes.INTEGER
     },
     {
       createdAt: true,
       updatedAt: true,
-      tableName: 'Accounts'
+      tableName: 'accounts'
     }
   )
 }

@@ -76,6 +76,7 @@ const getAccountByName = async accountName => {
 }
 
 const getAccountByID = async accountID => {
+  console.log('🚀 ~ file: accounts.js ~ line 79 ~ accountID', accountID)
   const { AccountModel } = getModels()
   const account = await AccountModel.findByPk(accountID)
 

@@ -18,7 +18,7 @@ const Location = sequelize => {
     {
       createdAt: true,
       updatedAt: true,
-      tableName: 'Locations'
+      tableName: 'locations'
     }
   )
 }

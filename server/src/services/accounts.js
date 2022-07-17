@@ -26,8 +26,11 @@ const getAccountByName = async () => {
   return await gabn()
 }
 
-const getAccountByID = async () => {
-  return await gabi()
+/**
+ * @param {Number} accountID
+ */
+const getAccountByID = async accountID => {
+  return await gabi(accountID)
 }
 
 /**

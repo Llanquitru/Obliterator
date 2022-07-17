@@ -63,12 +63,16 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
     }
   })
 
-  router.get(`${prefix}/byID/:accountByID`, async (req, res) => {
+  router.get(`${prefix}/byID/:accountID`, async (req, res) => {
     try {
       const {
-        params: { accountByID }
+        params: { accountID }
       } = req
-      const account = await getAccountByID(accountByID)
+      console.log(
+        '🚀 ~ file: accounts.js ~ line 72 ~ router.get ~ accountID',
+        accountID
+      )
+      const account = await getAccountByID(parseInt(accountID))
 
       response({
         res,

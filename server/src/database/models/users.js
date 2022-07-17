@@ -21,7 +21,7 @@ const User = sequelize => {
     {
       createdAt: true,
       updatedAt: true,
-      tableName: 'Users'
+      tableName: 'users'
     }
   )
 }

@@ -18,7 +18,7 @@ const PaymentMethod = sequelize => {
     {
       createdAt: true,
       updatedAt: true,
-      tableName: 'PaymentMethods'
+      tableName: 'paymentMethods'
     }
   )
 }
