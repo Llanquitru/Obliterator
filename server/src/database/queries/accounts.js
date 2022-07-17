@@ -1,3 +1,5 @@
+import { createHash } from 'crypto'
+
 import { getModels } from '../index.js'
 
 /**
@@ -7,23 +9,17 @@ import { getModels } from '../index.js'
  * @param {String} args.password
  * @param {String} args.artist
  */
-const storeAccounts = async ({ accountName, password, email, artist }) => {
+const storeAccount = async ({ accountName, password, email, artist }) => {
+  const hash = createHash('sha256')
   const { AccountModel } = getModels()
   const account = await AccountModel.create({
     account_name: accountName,
-    account_password: password,
+    account_password: hash.update(password).digest('hex'),
     account_email: email,
     is_artist: artist
   })
 
   return account.get()
-}
-
-const getAllAccounts = async () => {
-  const { AccountModel } = getModels()
-  const accounts = await AccountModel.findAll()
-
-  return accounts.map(account => account.get())
 }
 
 /**
@@ -35,24 +31,30 @@ const getAllAccounts = async () => {
  * @param {String|undefined} accountData.account_email
  * @param {String|undefined} accountData.user_id
  */
-
-const updateOneAccounts = async (accountID, accountData) => {
+const updateOneAccount = async (accountID, accountData) => {
+  const hash = createHash('sha256')
   const { AccountModel } = getModels()
 
-  await AccountModel.update(accountData, {
-    where: { account_id: accountID },
-    limit: 1
-  })
+  await AccountModel.update(
+    {
+      ...accountData,
+      account_password: hash.update(accountData.account_password).digest('hex')
+    },
+    {
+      where: { account_id: accountID },
+      limit: 1
+    }
+  )
 
   const accountUpdated = await AccountModel.findByPk(accountID)
 
   return accountUpdated.get()
 }
+
 /**
  * @param {Number} accountID
  */
-
-const deleteOneAccounts = async accountID => {
+const deleteOneAccount = async accountID => {
   const { AccountModel } = getModels()
 
   await AccountModel.destroy({
@@ -61,7 +63,29 @@ const deleteOneAccounts = async accountID => {
     }
   })
 
-  return 'La cuenta fue borrado correctamente'
+  return 'La cuenta fue borrada correctamente'
 }
 
-export { storeAccounts, getAllAccounts, updateOneAccounts, deleteOneAccounts }
+const getAccountByName = async accountName => {
+  const { AccountModel } = getModels()
+  const accounts = await AccountModel.findAll({
+    where: { account_name: accountName }
+  })
+
+  return accounts.map(account => account.get())
+}
+
+const getAccountByID = async accountID => {
+  const { AccountModel } = getModels()
+  const account = await AccountModel.findByPk(accountID)
+
+  return account.get()
+}
+
+export {
+  storeAccount,
+  updateOneAccount,
+  deleteOneAccount,
+  getAccountByName,
+  getAccountByID
+}

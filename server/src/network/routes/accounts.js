@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import {
   deleteAccount,
-  getAccount,
+  getAccountByName,
   updateAccount,
-  uploadAccount
+  createAccount,
+  getAccountByID
 } from '../../services/accounts.js'
 
 import { response } from '../response.js'
@@ -18,7 +19,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       const {
         body: { account_name: accountName, email, password, artist }
       } = req
-      const account = await uploadAccount({
+      const account = await createAccount({
         accountName,
         email,
         password,
@@ -39,31 +40,35 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       response({ res })
     }
   })
-  router.get(`${prefix}/`, async (req, res) => {
+
+  router.get(`${prefix}/byName/:accountName`, async (req, res) => {
     try {
-      const account = await getAccount()
+      const {
+        params: { accountName }
+      } = req
+      const accounts = await getAccountByName(accountName)
 
       response({
         res,
         error: false,
-        message: account,
+        message: accounts,
         status: 200
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 53 ~ router.get ~ error',
+        '🚀 ~ file: accounts.js ~ line 57 ~ router.get ~ error',
         error
       )
       response({ res })
     }
   })
 
-  router.get(`${prefix}/:accountName`, async (req, res) => {
+  router.get(`${prefix}/byID/:accountByID`, async (req, res) => {
     try {
       const {
-        params: { accountName }
+        params: { accountByID }
       } = req
-      const account = await getAccount(accountName)
+      const account = await getAccountByID(accountByID)
 
       response({
         res,
@@ -73,7 +78,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 75 ~ router.get ~ error',
+        '🚀 ~ file: accounts.js ~ line 79 ~ router.get ~ error',
         error
       )
       response({ res })
