@@ -7,7 +7,6 @@ import { getModels } from '../index.js'
  * @param {String} args.password
  * @param {String} args.artist
  */
-
 const storeAccounts = async ({ accountName, password, email, artist }) => {
   const { AccountModel } = getModels()
   const account = await AccountModel.create({

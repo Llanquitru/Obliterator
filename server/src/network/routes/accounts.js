@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   deleteAccount,
   getAccount,
@@ -33,7 +34,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 28 ~ router.post ~ error',
+        '🚀 ~ file: accounts.js ~ line 36 ~ router.post ~ error',
         error
       )
       response({ res })
@@ -51,7 +52,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 48 ~ router.get ~ error',
+        '🚀 ~ file: accounts.js ~ line 54 ~ router.get ~ error',
         error
       )
       response({ res })
@@ -72,7 +73,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 48 ~ router.get ~ error',
+        '🚀 ~ file: accounts.js ~ line 75 ~ router.get ~ error',
         error
       )
       response({ res })
@@ -108,9 +109,10 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 62 ~ router.patch ~ error',
+        '🚀 ~ file: accounts.js ~ line 111 ~ router.patch ~ error',
         error
       )
+
       response({ res })
     }
   })
@@ -130,7 +132,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 97 ~ router.delete ~ error',
+        '🚀 ~ file: accounts.js ~ line 134 ~ router.delete ~ error',
         error
       )
       response({ res })
