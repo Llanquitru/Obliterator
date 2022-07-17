@@ -13,7 +13,6 @@ import { response } from '../response.js'
  * @param {String} prefix
  */
 const api3dModelsRouter = (router, prefix = '/models') => {
-  // Upload models
   router.post(`${prefix}/`, multer.single('file'), async (req, res) => {
     try {
       const {
@@ -34,14 +33,13 @@ const api3dModelsRouter = (router, prefix = '/models') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 28 ~ router.post ~ error',
+        '🚀 ~ file: models3D.js ~ line 35 ~ router.post ~ error',
         error
       )
       response({ res })
     }
   })
 
-  // Get models
   router.get(`${prefix}/`, async (req, res) => {
     try {
       const models = await getModels()
@@ -54,14 +52,13 @@ const api3dModelsRouter = (router, prefix = '/models') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 48 ~ router.get ~ error',
+        '🚀 ~ file: models3D.js ~ line 51 ~ router.get ~ error',
         error
       )
       response({ res })
     }
   })
 
-  // Update model
   router.patch(`${prefix}/:modelID`, async (req, res) => {
     try {
       const {
@@ -84,14 +81,13 @@ const api3dModelsRouter = (router, prefix = '/models') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 62 ~ router.patch ~ error',
+        '🚀 ~ file: models3D.js ~ line 83 ~ router.patch ~ error',
         error
       )
       response({ res })
     }
   })
 
-  // Delete model
   router.delete(`${prefix}/:modelID`, async (req, res) => {
     try {
       const {
@@ -107,7 +103,7 @@ const api3dModelsRouter = (router, prefix = '/models') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 97 ~ router.delete ~ error',
+        '🚀 ~ file: models3D.js ~ line 105 ~ router.delete ~ error',
         error
       )
       response({ res })

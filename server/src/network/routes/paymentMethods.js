@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   deletePaymentMethods,
   getPaymentMethods,
@@ -11,8 +12,7 @@ import { response } from '../response.js'
  * @param {import('express').Router} router
  * @param {String} prefix
  */
-
-const apipaymentMethodsRouter = (router, prefix = '/paymentMethods') => {
+const apiPaymentMethodsRouter = (router, prefix = '/paymentMethods') => {
   router.post(`${prefix}/`, async (req, res) => {
     try {
       const {
@@ -30,12 +30,13 @@ const apipaymentMethodsRouter = (router, prefix = '/paymentMethods') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: paymentMethods.js ~ line 28 ~ router.post ~ error',
+        '🚀 ~ file: paymentMethods.js ~ line 32 ~ router.post ~ error',
         error
       )
       response({ res })
     }
   })
+
   router.get(`${prefix}/`, async (req, res) => {
     try {
       const paymentMethods = await getPaymentMethods()
@@ -48,21 +49,21 @@ const apipaymentMethodsRouter = (router, prefix = '/paymentMethods') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: paymentMethods.js ~ line 48 ~ router.get ~ error',
+        '🚀 ~ file: paymentMethods.js ~ line 51 ~ router.get ~ error',
         error
       )
       response({ res })
     }
   })
-  // Update model
-  router.patch(`${prefix}/:PaymentMethodsID`, async (req, res) => {
+
+  router.patch(`${prefix}/:paymentMethodID`, async (req, res) => {
     try {
       const {
         body: { method_name },
-        params: { PaymentMethodsID }
+        params: { paymentMethodID }
       } = req
       const accountUpdated = await updatePaymentMethods(
-        parseInt(PaymentMethodsID),
+        parseInt(paymentMethodID),
         {
           method_name
         }
@@ -71,12 +72,12 @@ const apipaymentMethodsRouter = (router, prefix = '/paymentMethods') => {
       response({
         res,
         error: false,
-        message: paymentMethods,
+        message: accountUpdated,
         status: 200
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: paymentMethods.js ~ line 62 ~ router.patch ~ error',
+        '🚀 ~ file: paymentMethods.js ~ line 79 ~ router.patch ~ error',
         error
       )
       response({ res })
@@ -98,7 +99,7 @@ const apipaymentMethodsRouter = (router, prefix = '/paymentMethods') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: paymentMethods.js ~ line 97 ~ router.delete ~ error',
+        '🚀 ~ file: paymentMethods.js ~ line 101 ~ router.delete ~ error',
         error
       )
       response({ res })
@@ -106,4 +107,4 @@ const apipaymentMethodsRouter = (router, prefix = '/paymentMethods') => {
   })
 }
 
-export { apipaymentMethodsRouter }
+export { apiPaymentMethodsRouter }

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   deleteProject,
   getProjects,
@@ -12,7 +13,6 @@ import { response } from '../response.js'
  * @param {String} prefix
  */
 const api3dProjectsRouter = (router, prefix = '/projects') => {
-  // Upload models
   router.post(`${prefix}/`, multer.single('file'), async (req, res) => {
     try {
       const {
@@ -34,14 +34,13 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: project.js ~ line 28 ~ router.post ~ error',
+        '🚀 ~ file: projects.js ~ line 37 ~ router.post ~ error',
         error
       )
       response({ res })
     }
   })
 
-  // Get models
   router.get(`${prefix}/`, async (req, res) => {
     try {
       const project = await getProjects()
@@ -54,14 +53,13 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: projects.js ~ line 48 ~ router.get ~ error',
+        '🚀 ~ file: projects.js ~ line 57 ~ router.get ~ error',
         error
       )
       response({ res })
     }
   })
 
-  // Update model
   router.patch(`${prefix}/:ProjectID`, async (req, res) => {
     try {
       const {
@@ -90,20 +88,19 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: project.js ~ line 62 ~ router.patch ~ error',
+        '🚀 ~ file: projects.js ~ line 93 ~ router.patch ~ error',
         error
       )
       response({ res })
     }
   })
 
-  // Delete model
-  router.delete(`${prefix}/:ProjectID`, async (req, res) => {
+  router.delete(`${prefix}/:projectID`, async (req, res) => {
     try {
       const {
-        params: { modelID }
+        params: { projectID }
       } = req
-      const deleteResult = await deleteProject(ProjectID)
+      const deleteResult = await deleteProject(projectID)
 
       response({
         res,
@@ -113,7 +110,7 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: 3dModels.js ~ line 97 ~ router.delete ~ error',
+        '🚀 ~ file: projects.js ~ line 116 ~ router.delete ~ error',
         error
       )
       response({ res })

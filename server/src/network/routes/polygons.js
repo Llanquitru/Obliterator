@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   deletePolygons,
   getPolygons,
@@ -10,7 +11,6 @@ import { response } from '../response.js'
  * @param {import('express').Router} router
  * @param {String} prefix
  */
-
 const apiPolygonsRouter = (router, prefix = '/polygons') => {
   router.post(`${prefix}/`, async (req, res) => {
     try {
@@ -31,7 +31,7 @@ const apiPolygonsRouter = (router, prefix = '/polygons') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: polygons.js ~ line 28 ~ router.post ~ error',
+        '🚀 ~ file: polygons.js ~ line 33 ~ router.post ~ error',
         error
       )
       response({ res })
@@ -49,20 +49,20 @@ const apiPolygonsRouter = (router, prefix = '/polygons') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: polygons.js ~ line 48 ~ router.get ~ error',
+        '🚀 ~ file: polygons.js ~ line 51 ~ router.get ~ error',
         error
       )
       response({ res })
     }
   })
-  // Update model
+
   router.patch(`${prefix}/:polygonsID`, async (req, res) => {
     try {
       const {
         body: { polygons_type, polygons_quantity },
         params: { polygonsID }
       } = req
-      const polygonstUpdated = await updatePolygons(parseInt(polygonsID), {
+      const polygonsUpdated = await updatePolygons(parseInt(polygonsID), {
         polygons_type,
         polygons_quantity
       })
@@ -70,12 +70,12 @@ const apiPolygonsRouter = (router, prefix = '/polygons') => {
       response({
         res,
         error: false,
-        message: polygonstUpdated,
+        message: polygonsUpdated,
         status: 200
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: polygons.js ~ line 62 ~ router.patch ~ error',
+        '🚀 ~ file: polygons.js ~ line 78 ~ router.patch ~ error',
         error
       )
       response({ res })
@@ -97,7 +97,7 @@ const apiPolygonsRouter = (router, prefix = '/polygons') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: polygons.js ~ line 97 ~ router.delete ~ error',
+        '🚀 ~ file: polygons.js ~ line 100 ~ router.delete ~ error',
         error
       )
       response({ res })

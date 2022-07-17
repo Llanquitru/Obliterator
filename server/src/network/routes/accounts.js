@@ -12,7 +12,6 @@ import { response } from '../response.js'
  * @param {import('express').Router} router
  * @param {String} prefix
  */
-
 const apiAccountsRouter = (router, prefix = '/accounts') => {
   router.post(`${prefix}/`, async (req, res) => {
     try {
@@ -34,7 +33,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 36 ~ router.post ~ error',
+        '🚀 ~ file: accounts.js ~ line 35 ~ router.post ~ error',
         error
       )
       response({ res })
@@ -52,7 +51,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 54 ~ router.get ~ error',
+        '🚀 ~ file: accounts.js ~ line 53 ~ router.get ~ error',
         error
       )
       response({ res })
@@ -65,6 +64,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
         params: { accountName }
       } = req
       const account = await getAccount(accountName)
+
       response({
         res,
         error: false,
@@ -80,7 +80,6 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
     }
   })
 
-  // Update model
   router.patch(`${prefix}/:accountID`, async (req, res) => {
     try {
       const {
@@ -109,7 +108,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 111 ~ router.patch ~ error',
+        '🚀 ~ file: accounts.js ~ line 110 ~ router.patch ~ error',
         error
       )
 
@@ -132,7 +131,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 134 ~ router.delete ~ error',
+        '🚀 ~ file: accounts.js ~ line 133 ~ router.delete ~ error',
         error
       )
       response({ res })

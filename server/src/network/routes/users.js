@@ -1,7 +1,4 @@
-/**
- * @param {import('express').Router} router
- * @param {String} prefix
- */
+/* eslint-disable camelcase */
 
 import {
   deleteUser,
@@ -12,6 +9,10 @@ import {
 import { multerInstance as multer } from '../../utils/index.js'
 import { response } from '../response.js'
 
+/**
+ * @param {import('express').Router} router
+ * @param {String} prefix
+ */
 const apiUserRouter = (router, prefix = '/users') => {
   router.post(`${prefix}/`, multer.single('file'), async (req, res) => {
     try {
@@ -32,7 +33,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log('🚀 ~ file: user.js ~ line 28 ~ router.post ~ error', error)
+      console.log('🚀 ~ file: users.js ~ line 36 ~ router.post ~ error', error)
       response({ res })
     }
   })
@@ -48,7 +49,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log('🚀 ~ file: user.js ~ line 48 ~ router.get ~ error', error)
+      console.log('🚀 ~ file: users.js ~ line 52 ~ router.get ~ error', error)
       response({ res })
     }
   })
@@ -73,7 +74,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log('🚀 ~ file: user.js ~ line 62 ~ router.patch ~ error', error)
+      console.log('🚀 ~ file: users.js ~ line 77 ~ router.patch ~ error', error)
       response({ res })
     }
   })
@@ -92,7 +93,10 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log('🚀 ~ file: user.js ~ line 97 ~ router.delete ~ error', error)
+      console.log(
+        '🚀 ~ file: users.js ~ line 96 ~ router.delete ~ error',
+        error
+      )
       response({ res })
     }
   })

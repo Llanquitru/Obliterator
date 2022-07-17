@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import {
-  apipaymentMethodsRouter,
+  apiPaymentMethodsRouter,
   apiPolygonsRouter,
   api3dModelsRouter,
   apiAccountsRouter,
@@ -10,7 +10,7 @@ import {
 
 const router = Router()
 const routers = [
-  apipaymentMethodsRouter,
+  apiPaymentMethodsRouter,
   apiPolygonsRouter,
   api3dProjectsRouter,
   api3dModelsRouter,
