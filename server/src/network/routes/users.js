@@ -3,7 +3,7 @@
  * @param {String} prefix
  */
 
- import {
+import {
   deleteUser,
   getUser,
   updateUser,
@@ -12,18 +12,8 @@
 import { multerInstance as multer } from '../../utils/index.js'
 import { response } from '../response.js'
 
-
-
-
-
 const apiUserRouter = (router, prefix = '/users') => {
-  
-
-
-
-  router.post(`${prefix}/`,multer.single('file'), async (req, res) => {
-    
-
+  router.post(`${prefix}/`, multer.single('file'), async (req, res) => {
     try {
       const {
         body: { user_name: userName, description },
@@ -32,8 +22,7 @@ const apiUserRouter = (router, prefix = '/users') => {
       const user = await uploadUser({
         path,
         userName,
-        description,
-        
+        description
       })
 
       response({
@@ -43,15 +32,9 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log(
-        '🚀 ~ file: user.js ~ line 28 ~ router.post ~ error',
-        error
-      )
+      console.log('🚀 ~ file: user.js ~ line 28 ~ router.post ~ error', error)
       response({ res })
     }
-
-
-
   })
 
   router.get(`${prefix}/`, async (req, res) => {
@@ -65,10 +48,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log(
-        '🚀 ~ file: user.js ~ line 48 ~ router.get ~ error',
-        error
-      )
+      console.log('🚀 ~ file: user.js ~ line 48 ~ router.get ~ error', error)
       response({ res })
     }
   })
@@ -76,15 +56,14 @@ const apiUserRouter = (router, prefix = '/users') => {
   router.patch(`${prefix}/:userID`, async (req, res) => {
     try {
       const {
-        body: { user_name, user_description, img_url, location_id},
+        body: { user_name, user_description, img_url, location_id },
         params: { userID }
       } = req
       const userUpdated = await updateUser(parseInt(userID), {
         user_name,
         user_description,
         img_url,
-        location_id,
-      
+        location_id
       })
 
       response({
@@ -94,10 +73,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log(
-        '🚀 ~ file: user.js ~ line 62 ~ router.patch ~ error',
-        error
-      )
+      console.log('🚀 ~ file: user.js ~ line 62 ~ router.patch ~ error', error)
       response({ res })
     }
   })
@@ -116,15 +92,10 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log(
-        '🚀 ~ file: user.js ~ line 97 ~ router.delete ~ error',
-        error
-      )
+      console.log('🚀 ~ file: user.js ~ line 97 ~ router.delete ~ error', error)
       response({ res })
     }
   })
-
-
 }
 
 export { apiUserRouter }

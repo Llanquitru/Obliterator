@@ -1,4 +1,3 @@
-
 import {
   deleteAccount,
   getAccount,
@@ -8,24 +7,18 @@ import {
 
 import { response } from '../response.js'
 
-
 /**
  * @param {import('express').Router} router
  * @param {String} prefix
  */
 
 const apiAccountsRouter = (router, prefix = '/accounts') => {
- 
   router.post(`${prefix}/`, async (req, res) => {
-    
-
     try {
       const {
-        body: { account_name: accountName, email,password,artist },
-        
+        body: { account_name: accountName, email, password, artist }
       } = req
       const account = await uploadAccount({
-      
         accountName,
         email,
         password,
@@ -45,7 +38,6 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       )
       response({ res })
     }
-
   })
   router.get(`${prefix}/`, async (req, res) => {
     try {
@@ -87,11 +79,17 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
     }
   })
 
-// Update model
+  // Update model
   router.patch(`${prefix}/:accountID`, async (req, res) => {
     try {
       const {
-        body: { account_name, account_password, is_artist, account_email, user_id },
+        body: {
+          account_name,
+          account_password,
+          is_artist,
+          account_email,
+          user_id
+        },
         params: { accountID }
       } = req
       const accountUpdated = await updateAccount(parseInt(accountID), {
@@ -117,8 +115,6 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
     }
   })
 
-
-
   router.delete(`${prefix}/:accountID`, async (req, res) => {
     try {
       const {
@@ -140,7 +136,6 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       response({ res })
     }
   })
-
 }
 
 export { apiAccountsRouter }

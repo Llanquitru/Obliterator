@@ -1,13 +1,9 @@
 import {
-    deleteOneAccounts,
-    getAllAccounts,
-    updateOneAccounts,
-    storeAccounts
-  } from '../database/queries/index.js'
-  
-
-
-
+  deleteOneAccounts,
+  getAllAccounts,
+  updateOneAccounts,
+  storeAccounts
+} from '../database/queries/index.js'
 
 /**
  * @param {Object} args
@@ -17,21 +13,19 @@ import {
  * @param {String} args.artist
  */
 
- const uploadAccount = async ({ accountName, email, password,artist}) => {
-   
-  
-    return await storeAccounts({
+const uploadAccount = async ({ accountName, email, password, artist }) => {
+  return await storeAccounts({
     accountName,
     email,
     password,
     artist
-    })
-  }
-  
-  const getAccount = async () => {
-    return await getAllAccounts()
-  }
-  
+  })
+}
+
+const getAccount = async () => {
+  return await getAllAccounts()
+}
+
 /**
  * @param {Number} accountID
  * @param {Object} accountData
@@ -42,16 +36,15 @@ import {
  * @param {String|undefined} accountData.user_id
  */
 
-  const updateAccount = async (accountID, accountData) => {
-    return await updateOneAccounts(accountID, accountData)
-  }
-  
-  /**
-   * @param {Number} accountID
-   */
-  const deleteAccount = async accountID => {
-    return await deleteOneAccounts(accountID)
-  }
-  
+const updateAccount = async (accountID, accountData) => {
+  return await updateOneAccounts(accountID, accountData)
+}
 
-  export { uploadAccount, getAccount, updateAccount, deleteAccount }
+/**
+ * @param {Number} accountID
+ */
+const deleteAccount = async accountID => {
+  return await deleteOneAccounts(accountID)
+}
+
+export { uploadAccount, getAccount, updateAccount, deleteAccount }

@@ -1,14 +1,12 @@
 import {
-    deleteOneModel,
-    getAllModels,
-    storeProjects,
-    updateOneModel
-  } from '../database/queries/index.js'
-  import { uploadImage } from '../utils/index.js'
-  
+  deleteOneModel,
+  getAllModels,
+  storeProjects,
+  updateOneModel
+} from '../database/queries/index.js'
+import { uploadImage } from '../utils/index.js'
 
-
-  /**
+/**
  * @param {Object} args
  * @param {String} args.path
  * @param {String} args.ProjectName
@@ -16,26 +14,31 @@ import {
  * @param {String} args.projectUrl
  * @param {String} args.projectDescription
  *
- * 
- * 
+ *
+ *
  * @returns Model object
  */
 
-   const uploadProject = async ({ path, ProjectName, projectPrice,projectDescription}) => {
-    const imageUrl = await uploadImage(path)
-  
-    return await storeProjects({
-        ProjectName,
-        projectPrice,
-        imageUrl,
-        projectDescription
-    })
-  }
+const uploadProject = async ({
+  path,
+  ProjectName,
+  projectPrice,
+  projectDescription
+}) => {
+  const imageUrl = await uploadImage(path)
 
-  const getProjects = async () => {
-    return await getAllModels()
-  }
-  /**
+  return await storeProjects({
+    ProjectName,
+    projectPrice,
+    imageUrl,
+    projectDescription
+  })
+}
+
+const getProjects = async () => {
+  return await getAllModels()
+}
+/**
  * @param {Number} ProjectID
  * @param {Object} ProjectData
  * @param {String|undefined} ProjectData.project_name
@@ -45,17 +48,15 @@ import {
  * @param {String|undefined} ProjectData.user_id
  */
 
-   const updateProjects = async (ProjectID, ProjectData) => {
-    return await updateOneModel(ProjectID, ProjectData)
-  }
-  
+const updateProjects = async (ProjectID, ProjectData) => {
+  return await updateOneModel(ProjectID, ProjectData)
+}
 
-  /**
+/**
  * @param {Number} ProjectID
  */
 const deleteProject = async ProjectID => {
-    return await deleteOneModel(ProjectID)
-  }
+  return await deleteOneModel(ProjectID)
+}
 
-  
 export { uploadProject, getProjects, updateProjects, deleteProject }

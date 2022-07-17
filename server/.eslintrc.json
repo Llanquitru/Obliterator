@@ -44,6 +44,7 @@
     "prettier/prettier": [
       "error",
       {
+        "endOfLine": "auto",
         "arrowParens": "avoid",
         "bracketSpacing": true,
         "printWidth": 80,

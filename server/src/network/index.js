@@ -6,7 +6,6 @@ import {
   apiAccountsRouter,
   apiUserRouter,
   api3dProjectsRouter
-  
 } from './routes/index.js'
 
 const router = Router()
