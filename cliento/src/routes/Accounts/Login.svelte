@@ -29,7 +29,12 @@
         if ( usernameBlank || passwordBlank){
             toggleBlank()
         } else {
-            goHome()
+            let endpoint = `localhost:3003/api/accounts${username}`
+            try {
+              const response = axios.get(endpoint)
+            } catch (error) {
+              console.log("error")
+            }
         }
     }
 </script>
