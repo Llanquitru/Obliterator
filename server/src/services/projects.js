@@ -57,9 +57,17 @@ const getProjectsByUserID = async userID => {
  * @param {String|undefined} projectData.project_url
  * @param {String|undefined} projectData.project_description
  * @param {String|undefined} projectData.user_id
+ * @param {String|undefined} path
  */
-const updateProject = async (projectID, projectData) => {
-  return await updateOneProject(projectID, projectData)
+const updateProject = async (projectID, projectData, path) => {
+  let imageUrl = ''
+
+  if (path) imageUrl = await uploadImage(path)
+
+  return await updateOneProject(projectID, {
+    projectData,
+    ...(imageUrl && { project_image_url: imageUrl })
+  })
 }
 
 /**

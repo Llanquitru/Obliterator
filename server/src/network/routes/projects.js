@@ -91,40 +91,46 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
     }
   })
 
-  router.patch(`${prefix}/:projectID`, async (req, res) => {
-    try {
-      const {
-        body: {
+  router.patch(
+    `${prefix}/:projectID`,
+    multer.single('file'),
+    async (req, res) => {
+      try {
+        const {
+          body: {
+            project_name,
+            project_price,
+            project_url,
+            project_description,
+            user_id
+          },
+          params: { projectID },
+          file: { path }
+        } = req
+        const projectUpdated = await updateProject(parseInt(projectID), {
+          path,
           project_name,
           project_price,
           project_url,
           project_description,
           user_id
-        },
-        params: { projectID }
-      } = req
-      const projectUpdated = await updateProject(parseInt(projectID), {
-        project_name,
-        project_price,
-        project_url,
-        project_description,
-        user_id
-      })
+        })
 
-      response({
-        res,
-        error: false,
-        message: projectUpdated,
-        status: 200
-      })
-    } catch (error) {
-      console.log(
-        '🚀 ~ file: projects.js ~ line 109 ~ router.patch ~ error',
-        error
-      )
-      response({ res })
+        response({
+          res,
+          error: false,
+          message: projectUpdated,
+          status: 200
+        })
+      } catch (error) {
+        console.log(
+          '🚀 ~ file: projects.js ~ line 109 ~ router.patch ~ error',
+          error
+        )
+        response({ res })
+      }
     }
-  })
+  )
 
   router.delete(`${prefix}/:projectID`, async (req, res) => {
     try {
