@@ -1,24 +1,46 @@
-import { getModels } from '../index.js'
+import { getModels, sequelize, updateOneAccount } from '../index.js'
 
 /**
  * @param {Object} args
- * @param {String} args.user_name
- * @param {String} args.user_description
- * @param {string} args.img_url
+ * @param {String} args.userName
+ * @param {String} args.userDescription
+ * @param {String} args.userImageUrl
+ * @param {Number} args.accountID
+ * @returns User model
  */
-
-const storeUser = async ({ userName, description, imgurl }) => {
+const storeUser = async ({
+  userName,
+  userDescription,
+  userImageUrl,
+  accountID
+}) => {
+  const transaction = await sequelize.transaction()
   const { UserModel } = getModels()
-  const user = await UserModel.create({
-    user_name: userName,
-    user_description: description,
-    img_url: imgurl
-  })
 
-  return user.get()
+  try {
+    const user = await UserModel.create(
+      {
+        user_name: userName,
+        user_description: userDescription,
+        user_image_url: userImageUrl,
+        account_id: accountID
+      },
+      { transaction }
+    )
+
+    await updateOneAccount(accountID, { user_id: user.id }, transaction)
+    await transaction.commit()
+
+    return user.get()
+  } catch (error) {
+    await transaction.rollback()
+    console.log('🚀 ~ file: user.js ~ line 28 ~ storeUser ~ error', error)
+
+    throw new Error('Store user process failed')
+  }
 }
 
-const getAllUser = async () => {
+const getAllUsers = async () => {
   const { UserModel } = getModels()
   const user = await UserModel.findAll()
 
@@ -27,15 +49,24 @@ const getAllUser = async () => {
 
 /**
  * @param {Number} userID
+ * @returns User model
+ */
+const getUserByID = async userID => {
+  const { UserModel } = getModels()
+  const user = await UserModel.findByPk(userID)
+
+  return user.get()
+}
+
+/**
+ * @param {Number} userID
  * @param {Object} userData
  * @param {String|undefined} userData.user_name
  * @param {String|undefined} userData.user_description
- * @param {String|undefined} userData.img_url
+ * @param {String|undefined} userData.user_image_url
  * @param {String|undefined} userData.location_id
- *
  */
-
-const updateOneUsers = async (userID, userData) => {
+const updateOneUser = async (userID, userData) => {
   const { UserModel } = getModels()
 
   await UserModel.update(userData, {
@@ -47,10 +78,10 @@ const updateOneUsers = async (userID, userData) => {
 
   return userUpdated.get()
 }
+
 /**
  * @param {Number} userID
  */
-
 const deleteOneUser = async userID => {
   const { UserModel } = getModels()
 
@@ -60,7 +91,7 @@ const deleteOneUser = async userID => {
     }
   })
 
-  return 'La cuenta fue borrado correctamente'
+  return 'La cuenta fue borrada correctamente'
 }
 
-export { storeUser, getAllUser, updateOneUsers, deleteOneUser }
+export { storeUser, getAllUsers, getUserByID, updateOneUser, deleteOneUser }

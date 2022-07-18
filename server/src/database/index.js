@@ -77,8 +77,21 @@ const dbConnection = async () => {
         TransactionModel = Transaction(sequelize)
         TransactionTypeModel = TransactionType(sequelize)
 
-        AccountModel.belongsTo(UserModel, { as: 'User', foreignKey: 'user_id' })
-        ProjectModel.belongsTo(UserModel, { as: 'User', foreignKey: 'user_id' })
+        UserModel.belongsTo(AccountModel, {
+          as: 'Account',
+          foreignKey: 'account_id',
+          onDelete: 'CASCADE'
+        })
+        AccountModel.belongsTo(UserModel, {
+          as: 'User',
+          foreignKey: 'user_id',
+          onDelete: 'CASCADE'
+        })
+        ProjectModel.belongsTo(UserModel, {
+          as: 'User',
+          foreignKey: 'user_id',
+          onDelete: 'CASCADE'
+        })
         TransactionModel.belongsTo(UserModel, {
           through: 'Transaction_has_buyer',
           as: 'UserBuyer',

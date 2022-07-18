@@ -15,8 +15,9 @@ const User = sequelize => {
       },
       user_name: DataTypes.STRING,
       user_description: DataTypes.STRING,
-      img_url: DataTypes.STRING,
-      location_id: DataTypes.INTEGER
+      user_image_url: DataTypes.STRING,
+      location_id: DataTypes.INTEGER,
+      account_id: DataTypes.INTEGER
     },
     {
       createdAt: true,

@@ -1,8 +1,9 @@
 import {
   deleteOneUser,
-  getAllUser,
+  getAllUsers,
+  getUserByID as gubi,
   storeUser,
-  updateOneUsers
+  updateOneUser
 } from '../database/queries/index.js'
 import { uploadImage } from '../utils/index.js'
 
@@ -10,22 +11,32 @@ import { uploadImage } from '../utils/index.js'
  * @param {Object} args
  * @param {String} args.path
  * @param {String} args.userName
- * @param {String} args.description
- * @returns Model object
+ * @param {String} args.userDescription
+ * @param {Number} args.accountID
+ * @returns User object
  */
-
-const uploadUser = async ({ path, userName, description }) => {
+const createUser = async ({ path, userName, userDescription, accountID }) => {
   const imageUrl = await uploadImage(path)
-
-  return await storeUser({
+  const user = await storeUser({
     userName,
-    imageUrl,
-    description
+    userDescription,
+    userImageUrl: imageUrl,
+    accountID
   })
+
+  return user
 }
 
-const getUser = async () => {
-  return await getAllUser()
+const getUsers = async () => {
+  return await getAllUsers()
+}
+
+/**
+ * @param {Number} userID
+ * @returns
+ */
+const getUserByID = async userID => {
+  return await gubi(userID)
 }
 
 /**
@@ -33,12 +44,12 @@ const getUser = async () => {
  * @param {Object} userData
  * @param {String|undefined} userData.user_name
  * @param {String|undefined} userData.user_description
- * @param {String|undefined} userData.img_url
+ * @param {String|undefined} userData.user_image_url
  * @param {String|undefined} userData.location_id
  */
 
 const updateUser = async (userID, userData) => {
-  return await updateOneUsers(userID, userData)
+  return await updateOneUser(userID, userData)
 }
 
 /**
@@ -48,4 +59,4 @@ const deleteUser = async userID => {
   return await deleteOneUser(userID)
 }
 
-export { uploadUser, getUser, updateUser, deleteUser }
+export { createUser, getUsers, getUserByID, updateUser, deleteUser }

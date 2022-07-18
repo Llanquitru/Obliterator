@@ -30,19 +30,25 @@ const storeAccount = async ({ accountName, password, email, artist }) => {
  * @param {Number|undefined} accountData.is_artist
  * @param {String|undefined} accountData.account_email
  * @param {String|undefined} accountData.user_id
+ * @param {import('sequelize').Transaction|undefined} transaction
  */
-const updateOneAccount = async (accountID, accountData) => {
+const updateOneAccount = async (accountID, accountData, transaction) => {
   const hash = createHash('sha256')
   const { AccountModel } = getModels()
 
   await AccountModel.update(
     {
       ...accountData,
-      account_password: hash.update(accountData.account_password).digest('hex')
+      ...(accountData.account_password && {
+        account_password: hash
+          .update(accountData.account_password)
+          .digest('hex')
+      })
     },
     {
       where: { account_id: accountID },
-      limit: 1
+      limit: 1,
+      transaction
     }
   )
 
