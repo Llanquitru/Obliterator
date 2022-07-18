@@ -27,8 +27,12 @@ const createAccount = async ({ accountName, email, password, artist }) => {
   })
 }
 
-const getAccountByName = async () => {
-  return await gabn()
+/**
+ * @param {String} accountName
+ * @returns
+ */
+const getAccountByName = async accountName => {
+  return await gabn(accountName)
 }
 
 /**
