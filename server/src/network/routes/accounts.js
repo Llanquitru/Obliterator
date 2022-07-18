@@ -35,7 +35,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 35 ~ router.post ~ error',
+        '🚀 ~ file: accounts.js ~ line 37 ~ router.post ~ error',
         error
       )
       response({ res })
@@ -57,7 +57,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 57 ~ router.get ~ error',
+        '🚀 ~ file: accounts.js ~ line 59 ~ router.get ~ error',
         error
       )
       response({ res })
@@ -79,7 +79,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 79 ~ router.get ~ error',
+        '🚀 ~ file: accounts.js ~ line 81 ~ router.get ~ error',
         error
       )
       response({ res })
@@ -114,10 +114,9 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 110 ~ router.patch ~ error',
+        '🚀 ~ file: accounts.js ~ line 116 ~ router.patch ~ error',
         error
       )
-
       response({ res })
     }
   })
@@ -137,7 +136,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: accounts.js ~ line 133 ~ router.delete ~ error',
+        '🚀 ~ file: accounts.js ~ line 138 ~ router.delete ~ error',
         error
       )
       response({ res })
@@ -172,7 +171,7 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
           status: 200
         })
       } catch (error) {
-        console.log('🚀 ~ file: accounts.js ~ line 175 ~ .post ~ error', error)
+        console.log('🚀 ~ file: accounts.js ~ line 173 ~ .post ~ error', error)
         response({ res, message: 'Wrong email or password' })
       }
     })

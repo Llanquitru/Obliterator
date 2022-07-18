@@ -51,7 +51,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log('🚀 ~ file: users.js ~ line 53 ~ router.get ~ error', error)
+      console.log('🚀 ~ file: users.js ~ line 54 ~ router.get ~ error', error)
       response({ res })
     }
   })
@@ -70,7 +70,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log('🚀 ~ file: users.js ~ line 60 ~ router.get ~ error', error)
+      console.log('🚀 ~ file: users.js ~ line 73 ~ router.get ~ error', error)
       response({ res })
     }
   })
@@ -95,7 +95,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         status: 200
       })
     } catch (error) {
-      console.log('🚀 ~ file: users.js ~ line 97 ~ router.patch ~ error', error)
+      console.log('🚀 ~ file: users.js ~ line 98 ~ router.patch ~ error', error)
       response({ res })
     }
   })
@@ -115,7 +115,7 @@ const apiUserRouter = (router, prefix = '/users') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: users.js ~ line 116 ~ router.delete ~ error',
+        '🚀 ~ file: users.js ~ line 118 ~ router.delete ~ error',
         error
       )
       response({ res })

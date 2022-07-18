@@ -75,7 +75,7 @@ const apiPolygonsRouter = (router, prefix = '/polygons') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: polygons.js ~ line 78 ~ router.patch ~ error',
+        '🚀 ~ file: polygons.js ~ line 77 ~ router.patch ~ error',
         error
       )
       response({ res })
@@ -97,7 +97,7 @@ const apiPolygonsRouter = (router, prefix = '/polygons') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: polygons.js ~ line 100 ~ router.delete ~ error',
+        '🚀 ~ file: polygons.js ~ line 99 ~ router.delete ~ error',
         error
       )
       response({ res })

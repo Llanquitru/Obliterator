@@ -52,7 +52,7 @@ const api3dModelsRouter = (router, prefix = '/models') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: models3D.js ~ line 51 ~ router.get ~ error',
+        '🚀 ~ file: models3D.js ~ line 54 ~ router.get ~ error',
         error
       )
       response({ res })
