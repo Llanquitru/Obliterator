@@ -1,8 +1,8 @@
 import {
-  deleteOneModel,
-  getAllModels,
+  deleteOneProject,
+  getAllProjects,
   storeProject,
-  updateOneModel
+  updateOneProject
 } from '../database/queries/index.js'
 import { uploadImage } from '../utils/index.js'
 
@@ -37,7 +37,7 @@ const uploadProject = async ({
 }
 
 const getProjects = async () => {
-  return await getAllModels()
+  return await getAllProjects()
 }
 
 /**
@@ -50,14 +50,14 @@ const getProjects = async () => {
  * @param {String|undefined} projectData.user_id
  */
 const updateProject = async (projectID, projectData) => {
-  return await updateOneModel(projectID, projectData)
+  return await updateOneProject(projectID, projectData)
 }
 
 /**
  * @param {Number} projectID
  */
 const deleteProject = async projectID => {
-  return await deleteOneModel(projectID)
+  return await deleteOneProject(projectID)
 }
 
 export { uploadProject, getProjects, updateProject, deleteProject }
