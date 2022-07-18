@@ -2,7 +2,7 @@
 import {
   deleteProject,
   getProjects,
-  updateProjects,
+  updateProject,
   uploadProject
 } from '../../services/projects.js'
 import { multerInstance as multer } from '../../utils/index.js'
@@ -16,14 +16,22 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
   router.post(`${prefix}/`, multer.single('file'), async (req, res) => {
     try {
       const {
-        body: { project_name: ProjectName, projectPrice, projectDescription },
+        body: {
+          projectName,
+          projectPrice,
+          projectDescription,
+          projectUrl,
+          userID
+        },
         file: { path }
       } = req
       const project = await uploadProject({
         path,
-        ProjectName,
+        projectName,
         projectPrice: parseInt(projectPrice),
-        projectDescription
+        projectDescription,
+        projectUrl,
+        userID: parseInt(userID)
       })
 
       response({
@@ -34,7 +42,7 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: projects.js ~ line 37 ~ router.post ~ error',
+        '🚀 ~ file: projects.js ~ line 36 ~ router.post ~ error',
         error
       )
       response({ res })
@@ -53,14 +61,14 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: projects.js ~ line 57 ~ router.get ~ error',
+        '🚀 ~ file: projects.js ~ line 56 ~ router.get ~ error',
         error
       )
       response({ res })
     }
   })
 
-  router.patch(`${prefix}/:ProjectID`, async (req, res) => {
+  router.patch(`${prefix}/:projectID`, async (req, res) => {
     try {
       const {
         body: {
@@ -70,9 +78,9 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
           project_description,
           user_id
         },
-        params: { ProjectID }
+        params: { projectID }
       } = req
-      const projectUpdated = await updateProjects(parseInt(ProjectID), {
+      const projectUpdated = await updateProject(parseInt(projectID), {
         project_name,
         project_price,
         project_url,
@@ -88,7 +96,7 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: projects.js ~ line 93 ~ router.patch ~ error',
+        '🚀 ~ file: projects.js ~ line 91 ~ router.patch ~ error',
         error
       )
       response({ res })
@@ -110,7 +118,7 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: projects.js ~ line 116 ~ router.delete ~ error',
+        '🚀 ~ file: projects.js ~ line 112 ~ router.delete ~ error',
         error
       )
       response({ res })

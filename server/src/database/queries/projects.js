@@ -3,27 +3,34 @@ import { getModels } from '../index.js'
 /**
  * @param {Object} args
  * @param {String} args.projectName
- * @param {String} args.imageUrl
- * @param {String} args.projectDescription
  * @param {Number} args.projectPrice
+ * @param {String} args.projectDescription
+ * @param {String} args.projectUrl
+ * @param {String} args.imageUrl
+ * @param {Number} args.userID
+ *  * @returns Project object
  */
-
-const storeProjects = async ({
+const storeProject = async ({
   projectName,
-  imageUrl,
+  projectPrice,
   projectDescription,
-  projectPrice
+  projectUrl,
+  imageUrl,
+  userID
 }) => {
   const { ProjectModel } = getModels()
   const project = await ProjectModel.create({
     project_name: projectName,
-    project_url: imageUrl,
+    project_price: projectPrice,
     project_description: projectDescription,
-    project_price: projectPrice
+    project_image_url: imageUrl,
+    project_url: projectUrl,
+    user_id: userID
   })
 
   return project.get()
 }
+
 const getAllProjects = async () => {
   const { ProjectModel } = getModels()
   const project = await ProjectModel.findAll()
@@ -40,7 +47,6 @@ const getAllProjects = async () => {
  * @param {String|undefined} projectsData.project_description
  * @param {String|undefined} projectsData.user_id
  */
-
 const updateOneProject = async (projectsID, projectsData) => {
   const { ProjectModel } = getModels()
 
@@ -55,18 +61,19 @@ const updateOneProject = async (projectsID, projectsData) => {
 }
 
 /**
- * @param {Number} projectsID
+ * @param {Number} projectID
  */
-const deleteOneProject = async modelID => {
+const deleteOneProject = async projectID => {
   const { ProjectModel } = getModels()
 
   await ProjectModel.destroy({
     where: {
-      project_id: projectsID
-    }
+      project_id: projectID
+    },
+    limit: 1
   })
 
   return 'El proyecto fue borrado correctamente'
 }
 
-export { storeProjects, getAllProjects, updateOneProject, deleteOneProject }
+export { storeProject, getAllProjects, updateOneProject, deleteOneProject }

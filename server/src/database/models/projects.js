@@ -15,8 +15,9 @@ const Project = sequelize => {
       },
       project_name: DataTypes.STRING,
       project_price: DataTypes.INTEGER,
-      project_url: DataTypes.STRING,
       project_description: DataTypes.STRING,
+      project_url: DataTypes.STRING,
+      project_image_url: DataTypes.STRING,
       user_id: DataTypes.INTEGER
     },
     {

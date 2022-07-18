@@ -55,7 +55,8 @@ const deleteOneModel = async modelID => {
   await Model3DModel.destroy({
     where: {
       model_id: modelID
-    }
+    },
+    limit: 1
   })
 
   return 'El modelo fue borrado correctamente'
