@@ -1,5 +1,3 @@
-import { createHash } from 'crypto'
-
 import { getModels } from '../index.js'
 
 /**
@@ -10,11 +8,10 @@ import { getModels } from '../index.js'
  * @param {String} args.artist
  */
 const storeAccount = async ({ accountName, password, email, artist }) => {
-  const hash = createHash('sha256')
   const { AccountModel } = getModels()
   const account = await AccountModel.create({
     account_name: accountName,
-    account_password: hash.update(password).digest('hex'),
+    account_password: password,
     account_email: email,
     is_artist: artist
   })
@@ -33,24 +30,13 @@ const storeAccount = async ({ accountName, password, email, artist }) => {
  * @param {import('sequelize').Transaction|undefined} transaction
  */
 const updateOneAccount = async (accountID, accountData, transaction) => {
-  const hash = createHash('sha256')
   const { AccountModel } = getModels()
 
-  await AccountModel.update(
-    {
-      ...accountData,
-      ...(accountData.account_password && {
-        account_password: hash
-          .update(accountData.account_password)
-          .digest('hex')
-      })
-    },
-    {
-      where: { account_id: accountID },
-      limit: 1,
-      transaction
-    }
-  )
+  await AccountModel.update(accountData, {
+    where: { account_id: accountID },
+    limit: 1,
+    transaction
+  })
 
   const accountUpdated = await AccountModel.findByPk(accountID)
 

@@ -28,7 +28,7 @@ const storeUser = async ({
       { transaction }
     )
 
-    await updateOneAccount(accountID, { user_id: user.id }, transaction)
+    await updateOneAccount(accountID, { user_id: accountID }, transaction)
     await transaction.commit()
 
     return user.get()

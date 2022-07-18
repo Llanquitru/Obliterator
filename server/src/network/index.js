@@ -19,6 +19,5 @@ const routers = [
 ]
 
 routers.forEach(routerFn => routerFn(router))
-router.get('/', (req, res) => res.send('en endpoint api'))
 
 export { router }

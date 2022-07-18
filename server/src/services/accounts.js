@@ -1,3 +1,5 @@
+import { createHash } from 'crypto'
+
 import {
   deleteOneAccount,
   updateOneAccount,
@@ -14,10 +16,12 @@ import {
  * @param {String} args.artist
  */
 const createAccount = async ({ accountName, email, password, artist }) => {
+  const hash = createHash('sha256')
+
   return await storeAccount({
     accountName,
     email,
-    password,
+    password: hash.update(password).digest('hex'),
     artist
   })
 }
@@ -43,7 +47,14 @@ const getAccountByID = async accountID => {
  * @param {String|undefined} accountData.user_id
  */
 const updateAccount = async (accountID, accountData) => {
-  return await updateOneAccount(accountID, accountData)
+  const hash = createHash('sha256')
+
+  return await updateOneAccount(accountID, {
+    ...accountData,
+    ...(accountData.account_password && {
+      account_password: hash.update(accountData.account_password).digest('hex')
+    })
+  })
 }
 
 /**
