@@ -3,7 +3,8 @@ import {
   deleteProject,
   getProjects,
   updateProject,
-  uploadProject
+  uploadProject,
+  getProjectsByUserID
 } from '../../services/projects.js'
 import { multerInstance as multer } from '../../utils/index.js'
 import { response } from '../response.js'
@@ -68,6 +69,28 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
     }
   })
 
+  router.get(`${prefix}/byUserID/:userID`, async (req, res) => {
+    try {
+      const {
+        params: { userID }
+      } = req
+      const projects = await getProjectsByUserID(parseInt(userID))
+
+      response({
+        res,
+        error: false,
+        message: projects,
+        status: 200
+      })
+    } catch (error) {
+      console.log(
+        '🚀 ~ file: projects.js ~ line 75 ~ router.get ~ error',
+        error
+      )
+      response({ res })
+    }
+  })
+
   router.patch(`${prefix}/:projectID`, async (req, res) => {
     try {
       const {
@@ -96,7 +119,7 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: projects.js ~ line 91 ~ router.patch ~ error',
+        '🚀 ~ file: projects.js ~ line 109 ~ router.patch ~ error',
         error
       )
       response({ res })
@@ -118,9 +141,10 @@ const api3dProjectsRouter = (router, prefix = '/projects') => {
       })
     } catch (error) {
       console.log(
-        '🚀 ~ file: projects.js ~ line 112 ~ router.delete ~ error',
+        '🚀 ~ file: projects.js ~ line 131 ~ router.delete ~ error',
         error
       )
+
       response({ res })
     }
   })

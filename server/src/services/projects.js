@@ -1,6 +1,7 @@
 import {
   deleteOneProject,
   getAllProjects,
+  getProjectsByUserID as gpbui,
   storeProject,
   updateOneProject
 } from '../database/queries/index.js'
@@ -41,6 +42,14 @@ const getProjects = async () => {
 }
 
 /**
+ * @param {Number} userID
+ * @returns
+ */
+const getProjectsByUserID = async userID => {
+  return await gpbui(userID)
+}
+
+/**
  * @param {Number} projectID
  * @param {Object} projectData
  * @param {String|undefined} projectData.project_name
@@ -60,4 +69,10 @@ const deleteProject = async projectID => {
   return await deleteOneProject(projectID)
 }
 
-export { uploadProject, getProjects, updateProject, deleteProject }
+export {
+  uploadProject,
+  getProjects,
+  getProjectsByUserID,
+  updateProject,
+  deleteProject
+}

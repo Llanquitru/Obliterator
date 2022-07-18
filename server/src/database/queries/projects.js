@@ -33,9 +33,23 @@ const storeProject = async ({
 
 const getAllProjects = async () => {
   const { ProjectModel } = getModels()
-  const project = await ProjectModel.findAll()
+  const projects = await ProjectModel.findAll()
 
-  return project.map(project => project.get())
+  return projects.map(project => project.get())
+}
+
+/**
+ * @param {Number} userID
+ */
+const getProjectsByUserID = async userID => {
+  const { ProjectModel } = getModels()
+  const projects = await ProjectModel.findAll({
+    where: {
+      user_id: userID
+    }
+  })
+
+  return projects.map(project => project.get())
 }
 
 /**
@@ -76,4 +90,10 @@ const deleteOneProject = async projectID => {
   return 'El proyecto fue borrado correctamente'
 }
 
-export { storeProject, getAllProjects, updateOneProject, deleteOneProject }
+export {
+  storeProject,
+  getAllProjects,
+  getProjectsByUserID,
+  updateOneProject,
+  deleteOneProject
+}
