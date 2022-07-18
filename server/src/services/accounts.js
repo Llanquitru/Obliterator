@@ -5,8 +5,9 @@ import {
   updateOneAccount,
   storeAccount,
   getAccountByName as gabn,
-  getAccountByID as gabi
-} from '../database/queries/index.js'
+  getAccountByID as gabi,
+  getAccountByEmail
+} from '../database/index.js'
 
 /**
  * @param {Object} args
@@ -64,10 +65,28 @@ const deleteAccount = async accountID => {
   return await deleteOneAccount(accountID)
 }
 
+/**
+ * @param {String} email
+ * @param {String} password
+ */
+const login = async (email, password) => {
+  const hash = createHash('sha256')
+  const hashedPassword = hash.update(password).digest('hex')
+  const account = await getAccountByEmail(email)
+
+  if (!account) throw new Error('El email no está registrado')
+
+  if (account.account_password !== hashedPassword)
+    throw new Error('Contraseña incorrecta')
+
+  return account.user_id
+}
+
 export {
   createAccount,
   updateAccount,
   deleteAccount,
   getAccountByName,
-  getAccountByID
+  getAccountByID,
+  login
 }

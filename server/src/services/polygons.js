@@ -3,7 +3,7 @@ import {
   getAllPolygons,
   storePolygons,
   updateOnePolygons
-} from '../database/queries/index.js'
+} from '../database/index.js'
 
 /**
  * @param {Object} args

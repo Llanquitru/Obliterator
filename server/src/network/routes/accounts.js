@@ -4,7 +4,8 @@ import {
   getAccountByName,
   updateAccount,
   createAccount,
-  getAccountByID
+  getAccountByID,
+  login
 } from '../../services/accounts.js'
 
 import { response } from '../response.js'
@@ -68,10 +69,6 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       const {
         params: { accountID }
       } = req
-      console.log(
-        '🚀 ~ file: accounts.js ~ line 72 ~ router.get ~ accountID',
-        accountID
-      )
       const account = await getAccountByID(parseInt(accountID))
 
       response({
@@ -146,6 +143,39 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
       response({ res })
     }
   })
+
+  router
+    .route(`${prefix}/login`)
+    .get((req, res) => {
+      if (req.session.user && req.session.user.id)
+        return response({
+          res,
+          error: false,
+          message: 'User is logged',
+          status: 200
+        })
+
+      response({ res })
+    })
+    .post(async (req, res) => {
+      try {
+        const {
+          body: { email, password }
+        } = req
+        const userID = await login(email, password)
+
+        req.session.user = { id: userID }
+        response({
+          res,
+          error: false,
+          message: '¡Login successful!',
+          status: 200
+        })
+      } catch (error) {
+        console.log('🚀 ~ file: accounts.js ~ line 175 ~ .post ~ error', error)
+        response({ res, message: 'Email o contraseña equivocados' })
+      }
+    })
 }
 
 export { apiAccountsRouter }

@@ -4,7 +4,7 @@ import {
   getProjectsByUserID as gpbui,
   storeProject,
   updateOneProject
-} from '../database/queries/index.js'
+} from '../database/index.js'
 import { uploadImage } from '../utils/index.js'
 
 /**

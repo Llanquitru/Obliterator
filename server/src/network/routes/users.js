@@ -26,6 +26,7 @@ const apiUserRouter = (router, prefix = '/users') => {
         userDescription,
         accountID: parseInt(accountID)
       })
+      req.session.user = { id: user.user_id }
 
       response({
         res,

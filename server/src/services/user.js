@@ -4,7 +4,7 @@ import {
   getUserByID as gubi,
   storeUser,
   updateOneUser
-} from '../database/queries/index.js'
+} from '../database/index.js'
 import { uploadImage } from '../utils/index.js'
 
 /**

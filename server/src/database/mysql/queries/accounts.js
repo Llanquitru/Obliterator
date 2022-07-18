@@ -68,11 +68,24 @@ const getAccountByName = async accountName => {
 }
 
 const getAccountByID = async accountID => {
-  console.log('🚀 ~ file: accounts.js ~ line 79 ~ accountID', accountID)
   const { AccountModel } = getModels()
   const account = await AccountModel.findByPk(accountID)
 
   return account.get()
+}
+
+/**
+ * @param {String} email
+ * @returns
+ */
+const getAccountByEmail = async email => {
+  const { AccountModel } = getModels()
+  const users = await AccountModel.findAll({
+    where: { account_email: email },
+    limit: 1
+  })
+
+  return users.map(user => user.get())[0]
 }
 
 export {
@@ -80,5 +93,6 @@ export {
   updateOneAccount,
   deleteOneAccount,
   getAccountByName,
-  getAccountByID
+  getAccountByID,
+  getAccountByEmail
 }

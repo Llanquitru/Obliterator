@@ -3,7 +3,7 @@ import {
   getAllPaymentMethods,
   updateOnePaymentMethod,
   storepaymentMethods
-} from '../database/queries/index.js'
+} from '../database/index.js'
 
 /**
  * @param {Object} args

@@ -42,9 +42,9 @@ const storeUser = async ({
 
 const getAllUsers = async () => {
   const { UserModel } = getModels()
-  const user = await UserModel.findAll()
+  const users = await UserModel.findAll()
 
-  return user.map(user => user.get())
+  return users.map(user => user.get())
 }
 
 /**
