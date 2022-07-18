@@ -131,7 +131,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"account_name\": \"AnthonyLzq\",\n  \"email\": \"anthony.luzquinos@gmailcom\",\n  \"password\": \"12345\",\n  \"artist\": 1\n}",
+							"raw": "{\n  \"account_name\": \"AnthonyLzq\",\n  \"email\": \"anthony.luzquinos@gmail.com\",\n  \"password\": \"12345\",\n  \"artist\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,7 +159,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3003/api/accounts/byID/1",
+							"raw": "http://localhost:3003/api/accounts/byID/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -169,7 +169,7 @@
 								"api",
 								"accounts",
 								"byID",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -221,6 +221,78 @@
 								"api",
 								"accounts",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"anthony.luzquinos@gmail.com\",\n  \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/accounts/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/accounts/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/accounts/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"accounts",
+								"logout"
 							]
 						}
 					},
