@@ -173,9 +173,22 @@ const apiAccountsRouter = (router, prefix = '/accounts') => {
         })
       } catch (error) {
         console.log('🚀 ~ file: accounts.js ~ line 175 ~ .post ~ error', error)
-        response({ res, message: 'Email o contraseña equivocados' })
+        response({ res, message: 'Wrong email or password' })
       }
     })
+
+  router.get(`${prefix}/logout`, (req, res, next) => {
+    req.session.destroy(err => {
+      if (err) return response({ res })
+
+      response({
+        res,
+        error: false,
+        message: 'Ok',
+        status: 200
+      })
+    })
+  })
 }
 
 export { apiAccountsRouter }
